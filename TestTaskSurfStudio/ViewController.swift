@@ -49,18 +49,17 @@ class ViewController: UIViewController {
             sheet.preferredCornerRadius = 32
             sheet.detents = [.custom(resolver: { context in
                 0.41 * context.maximumDetentValue
-            }), .medium(), .large()]
+            }), .custom(resolver: { context in
+                0.65 * context.maximumDetentValue
+            }), .large()]
             sheet.largestUndimmedDetentIdentifier = .large
-            //sheet.prefersScrollingExpandsWhenScrolledToEdge = true
+//            sheet.prefersScrollingExpandsWhenScrolledToEdge = true
         }
         navigationController?.present(navVC, animated: true)
-
     }
 
     private func setupViews() {
         view.addSubview(backgroundImageView)
-        //view.addSubview(startButton)
-        //startButton.center = view.center
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

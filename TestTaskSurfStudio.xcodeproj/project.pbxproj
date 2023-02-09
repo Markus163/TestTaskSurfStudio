@@ -13,6 +13,7 @@
 		97E019692993CE800053FB21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97E019682993CE800053FB21 /* Assets.xcassets */; };
 		97E0196C2993CE800053FB21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97E0196A2993CE800053FB21 /* LaunchScreen.storyboard */; };
 		97E019742993EBDB0053FB21 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E019732993EBDB0053FB21 /* DetailViewController.swift */; };
+		97E019B629956D7D0053FB21 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E019B529956D7D0053FB21 /* BasicButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		97E0196B2993CE800053FB21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97E0196D2993CE800053FB21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97E019732993EBDB0053FB21 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		97E019B529956D7D0053FB21 /* BasicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				97E019612993CE7E0053FB21 /* SceneDelegate.swift */,
 				97E019632993CE7E0053FB21 /* ViewController.swift */,
 				97E019732993EBDB0053FB21 /* DetailViewController.swift */,
+				97E019B529956D7D0053FB21 /* BasicButton.swift */,
 				97E019682993CE800053FB21 /* Assets.xcassets */,
 				97E0196A2993CE800053FB21 /* LaunchScreen.storyboard */,
 				97E0196D2993CE800053FB21 /* Info.plist */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97E019642993CE7E0053FB21 /* ViewController.swift in Sources */,
+				97E019B629956D7D0053FB21 /* BasicButton.swift in Sources */,
 				97E019602993CE7E0053FB21 /* AppDelegate.swift in Sources */,
 				97E019622993CE7E0053FB21 /* SceneDelegate.swift in Sources */,
 				97E019742993EBDB0053FB21 /* DetailViewController.swift in Sources */,
@@ -286,6 +290,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -316,6 +321,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
