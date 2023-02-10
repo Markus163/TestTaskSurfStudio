@@ -28,14 +28,15 @@ class BasicButton: UIButton {
         setTitle(titleButton, for: .normal)
         let color = #colorLiteral(red: 0.1921568627, green: 0.1921568627, blue: 0.1921568627, alpha: 1)
         setTitleColor(color, for: .normal)
+        setTitleColor(.white, for: .highlighted)
         layer.cornerRadius = 12
         layer.masksToBounds = true
         //        titleLabel?.numberOfLines = 1
         titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        //        titleLabel?.adjustsFontSizeToFitWidth = true
-        //        titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
-        //        titleLabel?.lineBreakMode = .byWordWrapping
-        //        titleLabel?.adjustsFontForContentSizeCategory = true
+//                titleLabel?.adjustsFontSizeToFitWidth = true
+//                titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+//                titleLabel?.lineBreakMode = .byWordWrapping
+//                titleLabel?.adjustsFontForContentSizeCategory = true
         var conf = UIButton.Configuration.plain()
         conf.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 24, bottom: 12, trailing: 24)
         configuration = conf
