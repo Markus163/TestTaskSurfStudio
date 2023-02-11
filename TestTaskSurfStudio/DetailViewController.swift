@@ -16,16 +16,8 @@ class DetailViewController: UIViewController {
     private let basicButton4 = BasicButton(titleButton: "QA")
     private let basicButton5 = BasicButton(titleButton: "Flutter")
     private let basicButton6 = BasicButton(titleButton: "PM")
-    var scView: UIScrollView!
-    let buttonPadding:CGFloat = 12
-    var xOffset:CGFloat = 20
     
-//    private let scrollView: UIScrollView = {
-//        let sv = UIScrollView()
-//        sv.backgroundColor = .red
-//        sv.translatesAutoresizingMaskIntoConstraints = false
-//        return sv
-//    }()
+    private let horizontalMenuCollectionView = HorizontalCollectionView()
     
     private lazy var stackView : UIStackView = {
         let stackView = UIStackView()
@@ -161,66 +153,25 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        scrollViewConfigure()
-        
-        func scrollViewConfigure() {
-            scView = UIScrollView(frame: CGRect(x: 0, y: 120, width: view.bounds.width, height: 65))
-            view.addSubview(scView)
-            
-            scView.backgroundColor = UIColor.white
-            scView.translatesAutoresizingMaskIntoConstraints = false
-            
-            for i in 0 ... 5 {
-                let arrangeTitle = ["IOS", "Android","Design", "Flutter", "QA", "PM"]
-                let button = UIButton()
-                button.tag = i
-                button.backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9607843137, alpha: 1)
-                let color = #colorLiteral(red: 0.1921568627, green: 0.1921568627, blue: 0.1921568627, alpha: 1)
-                button.setTitleColor(color, for: .normal)
-                button.setTitle("\(arrangeTitle[i])", for: .normal)
-                button.layer.cornerRadius = 12
-                
-                //                var conf = UIButton.Configuration.plain()
-                //                conf.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 24, bottom: 12, trailing: 24)
-                //                button.configuration = conf
-                //                button.addTarget(self, action: #selector(btnTouch), for: UIControlEvents.touchUpInside)
-                button.frame = CGRect(x: xOffset, y: CGFloat(buttonPadding), width: 80, height: 44)
-                
-                xOffset = xOffset + CGFloat(buttonPadding) + button.frame.size.width
-                scView.addSubview(button)
-                
-            }
-            
-            scView.contentSize = CGSize(width: xOffset, height: scView.frame.height)
-        }
-        }
+ }
     
     private func setupViews() {
 //        middleLabel.isHidden = true
 //        stackView.isHidden = true
 //        stackView2.isHidden = true
+        view.addSubview(horizontalMenuCollectionView)
         view.backgroundColor = .systemBackground
         view.addSubview(titleLabel)
         view.addSubview(subtitleLabel)
         view.addSubview(middleLabel)
         view.addSubview(stackView)
         view.addSubview(stackView2)
-        //view.addSubview(scrollView)
-        //view.addSubview(stackView3)
         stackView.addArrangedSubview(basicButton1)
         stackView.addArrangedSubview(basicButton2)
         stackView.addArrangedSubview(basicButton3)
         stackView2.addArrangedSubview(basicButton4)
         stackView2.addArrangedSubview(basicButton5)
         stackView2.addArrangedSubview(basicButton6)
-//        stackView3.addArrangedSubview(bottomLabel)
-//        stackView3.addArrangedSubview(sendRequestButton)
-//        scrollView.addSubview(basicButton1)
-//        scrollView.addSubview(basicButton2)
-//        scrollView.addSubview(basicButton3)
-//        scrollView.addSubview(basicButton4)
-//        scrollView.addSubview(basicButton5)
-//        scrollView.addSubview(basicButton6)
         view.addSubview(bottomLabel)
         view.addSubview(sendRequestButton)
         subtitleLabel.center = view.center
@@ -269,6 +220,13 @@ class DetailViewController: UIViewController {
             stackView2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
         
+        NSLayoutConstraint.activate([
+                    horizontalMenuCollectionView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 12),
+                    horizontalMenuCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                    horizontalMenuCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                    horizontalMenuCollectionView.heightAnchor.constraint(equalToConstant: 44)
+                ])
+        
 //        NSLayoutConstraint.activate([
 //            //stackView3.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 136),
 //
@@ -280,11 +238,6 @@ class DetailViewController: UIViewController {
 //
 //        ])
        
-//        NSLayoutConstraint.activate([
-//            scView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 12),
-//            scView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            scView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-//        ])
     }
     
     @objc private func basicButtonTapped() {
