@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HorizontalMenuCollectionViewCell: UICollectionViewCell {
+class CollectionViewCell: UICollectionViewCell {
     
     let nameCategoryLabel: UILabel = {
         let label = UILabel()
@@ -19,12 +19,9 @@ class HorizontalMenuCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-//    override var isSelected: Bool {
-//        didSet {
-//            backgroundColor = self.isSelected ? #colorLiteral(red: 0.1921568627, green: 0.1921568627, blue: 0.1921568627, alpha: 1) : #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9607843137, alpha: 1)
-//            nameCategoryLabel.textColor = self.isSelected ? .white : #colorLiteral(red: 0.1921568627, green: 0.1921568627, blue: 0.1921568627, alpha: 1)
-//        }
-//    }
+    static var idetifier: String {
+        return String(describing: self)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,7 +37,7 @@ class HorizontalMenuCollectionViewCell: UICollectionViewCell {
         backgroundColor = #colorLiteral(red: 0.9529411765, green: 0.9529411765, blue: 0.9607843137, alpha: 1)
         layer.cornerRadius = 12
         addSubview(nameCategoryLabel)
-    
+        
     }
     
     private func setupConstraints() {

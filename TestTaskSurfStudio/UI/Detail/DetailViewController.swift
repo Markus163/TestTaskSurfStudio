@@ -10,43 +10,15 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    private let basicButton1 = BasicButton(titleButton: "IOS")
-    private let basicButton2 = BasicButton(titleButton: "Android")
-    private let basicButton3 = BasicButton(titleButton: "Design")
-    private let basicButton4 = BasicButton(titleButton: "QA")
-    private let basicButton5 = BasicButton(titleButton: "Flutter")
-    private let basicButton6 = BasicButton(titleButton: "PM")
-    
+    //MARK: - Constants
     private let horizontalMenuCollectionView = HorizontalCollectionView()
+    private let verticalMenuColectionView = VerticalCollectionView()
     
-    private lazy var stackView : UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis  = .horizontal
-        stackView.distribution  = .fillProportionally
-        stackView.alignment = .fill
-        stackView.spacing = 12
-        return stackView
-    }()
-    
-    private lazy var stackView2 : UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis  = .horizontal
-        stackView.distribution  = .fillProportionally
-        stackView.alignment = .fill
-        stackView.spacing = 12
-        return stackView
-    }()
-    
-    private lazy var stackView3 : UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis  = .horizontal
-        stackView.distribution  = .fillProportionally
-        stackView.alignment = .fill
-        stackView.spacing = 24
-        return stackView
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let titleLabel: UILabel = {
@@ -63,7 +35,7 @@ class DetailViewController: UIViewController {
         return label
     }()
     
-    private let subtitleLabel: UILabel = {
+    let subtitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .left
@@ -80,7 +52,7 @@ class DetailViewController: UIViewController {
         return label
     }()
     
-    private let middleLabel: UILabel = {
+    let middleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .left
@@ -112,21 +84,15 @@ class DetailViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.1921568627, green: 0.1921568627, blue: 0.1921568627, alpha: 1)
         button.layer.cornerRadius = 30
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setTitle("Отправить заявку", for: .normal)
         button.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        var conf = UIButton.Configuration.plain()
-        conf.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 44, bottom: 20, trailing: 44)
-        //configuration = conf
+        button.titleLabel?.font = UIFont(name: "SF Pro Display", size: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
         return button
     }()
     
     private func configureButton() {
-        
         UIView.animate(withDuration: 0.3) {
             self.sendRequestButton.alpha = 0.8
         }
@@ -142,7 +108,6 @@ class DetailViewController: UIViewController {
         showAlert()
     }
     
-    
     private func showAlert() {
         let alert = UIAlertController(title: "Поздравляем!", message: "Ваша заявка успешно отправлена!",  preferredStyle: .alert)
         let closeAction = UIAlertAction(title: "Закрыть", style: .default)
@@ -150,31 +115,28 @@ class DetailViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+    //MARK: - View Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
- }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let indexPath = IndexPath(row: horizontalMenuCollectionView.numOfItems / 2, section: 0)
+        horizontalMenuCollectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+    }
     
     private func setupViews() {
-//        middleLabel.isHidden = true
-//        stackView.isHidden = true
-//        stackView2.isHidden = true
-        view.addSubview(horizontalMenuCollectionView)
         view.backgroundColor = .systemBackground
+        view.addSubview(horizontalMenuCollectionView)
+        view.addSubview(verticalMenuColectionView)
         view.addSubview(titleLabel)
         view.addSubview(subtitleLabel)
         view.addSubview(middleLabel)
-        view.addSubview(stackView)
-        view.addSubview(stackView2)
-        stackView.addArrangedSubview(basicButton1)
-        stackView.addArrangedSubview(basicButton2)
-        stackView.addArrangedSubview(basicButton3)
-        stackView2.addArrangedSubview(basicButton4)
-        stackView2.addArrangedSubview(basicButton5)
-        stackView2.addArrangedSubview(basicButton6)
+        view.addSubview(backgroundView)
         view.addSubview(bottomLabel)
         view.addSubview(sendRequestButton)
-        subtitleLabel.center = view.center
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
@@ -194,7 +156,7 @@ class DetailViewController: UIViewController {
             bottomLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -78),
             bottomLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
-
+        
         NSLayoutConstraint.activate([
             sendRequestButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 136),
             sendRequestButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -206,41 +168,29 @@ class DetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             middleLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 80),
             middleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            middleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            middleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: middleLabel.bottomAnchor, constant: 12),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-            //stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -73),
+            horizontalMenuCollectionView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 12),
+            horizontalMenuCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            horizontalMenuCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            horizontalMenuCollectionView.heightAnchor.constraint(equalToConstant: 44)
         ])
         
         NSLayoutConstraint.activate([
-            stackView2.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 12),
-            stackView2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+            verticalMenuColectionView.topAnchor.constraint(equalTo: middleLabel.bottomAnchor, constant: 12),
+            verticalMenuColectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            verticalMenuColectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -73),
+            verticalMenuColectionView.heightAnchor.constraint(equalToConstant: 100)
         ])
         
         NSLayoutConstraint.activate([
-                    horizontalMenuCollectionView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 12),
-                    horizontalMenuCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-                    horizontalMenuCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-                    horizontalMenuCollectionView.heightAnchor.constraint(equalToConstant: 44)
-                ])
-        
-//        NSLayoutConstraint.activate([
-//            //stackView3.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 136),
-//
-//            stackView3.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            stackView3.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -58),
-//            stackView3.heightAnchor.constraint(equalToConstant: 60),
-//            stackView3.widthAnchor.constraint(equalToConstant: 335)
-//
-//
-//        ])
-       
-    }
-    
-    @objc private func basicButtonTapped() {
-        print("ButtonTap")
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            backgroundView.widthAnchor.constraint(equalToConstant: 375),
+            backgroundView.heightAnchor.constraint(equalToConstant: 150)
+        ])
     }
 }
