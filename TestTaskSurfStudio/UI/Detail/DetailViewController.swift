@@ -80,7 +80,7 @@ class DetailViewController: UIViewController {
         return label
     }()
     
-    private let sendRequestButton: UIButton = {
+    private lazy var sendRequestButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.1921568627, green: 0.1921568627, blue: 0.1921568627, alpha: 1)
         button.layer.cornerRadius = 30
